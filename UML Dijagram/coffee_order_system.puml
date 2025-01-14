@@ -1,0 +1,43 @@
+@startuml coffe_order
+skinparam backgroundColor #F9F9F9
+skinparam classAttributeIconSize 0
+
+title UML Dijagram - Aplikacija za naručivanje kafe
+
+class MainWindow {
+    +name_entry: Entry
+    +coffee_var: StringVar
+    +sugar_scale: Scale
+    +blend_var: StringVar
+    +addons_vars: dict
+    +reset(): void
+    +process_order(): void
+}
+
+class Coffee {
+    +name: str
+    +price: int
+}
+
+class Addon {
+    +name: str
+    +price: int
+}
+
+class Order {
+    +customer_name: str
+    +coffee: Coffee
+    +sugar: int
+    +blend: str
+    +addons: list
+    +calculate_total(): int
+    +save_to_json(): void
+}
+
+MainWindow "1" -- "*" Coffee : bira
+MainWindow "1" -- "*" Addon : dodaje
+MainWindow "1" -- "1" Order : kreira
+Order "1" -- "*" Coffee : sadrži
+Order "1" -- "*" Addon : sadrži
+
+@enduml
